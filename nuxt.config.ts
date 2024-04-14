@@ -7,6 +7,19 @@ export default defineNuxtConfig({
     '@nuxtjs/eslint-module',
     '@hebilicious/vue-query-nuxt',
   ],
+  components: [
+    {
+      path: '~/components',
+      pathPrefix: false,
+    },
+  ],
+  app: {
+    head: {
+      charset: 'utf-8',
+      viewport: 'width=device-width, initial-scale=1',
+      title: 'Pokémon',
+    },
+  },
   srcDir: './src',
   serverDir: './server',
   quasar: {
