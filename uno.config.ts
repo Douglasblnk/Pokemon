@@ -2,10 +2,13 @@ import {
   defineConfig,
   presetAttributify,
   presetIcons,
+  presetWebFonts,
   presetWind,
   transformerDirectives,
   transformerVariantGroup,
 } from 'unocss'
+
+import { FileSystemIconLoader } from '@iconify/utils/lib/loader/node-loaders'
 
 const spacing = {
   DEFAULT: '4px',
@@ -97,7 +100,31 @@ export default defineConfig({
   presets: [
     presetWind(),
     presetAttributify(),
-    presetIcons(),
+    presetIcons({
+      extraProperties: {
+        display: 'inline-block',
+        color: '',
+      },
+      warn: true,
+      collections: {
+        custom: FileSystemIconLoader(
+          './src/assets/icons',
+          svg => svg.replace(/<svg /, '<svg fill="currentColor" '),
+        ),
+      },
+    }),
+    presetWebFonts({
+      provider: 'google',
+      fonts: {
+        mulish: [
+          {
+            name: 'Mulish',
+            weights: [ '400', '500', '600', '700', '800', '900' ],
+            italic: true,
+          },
+        ],
+      },
+    }),
   ],
   transformers: [
     transformerDirectives(),
