@@ -22,6 +22,7 @@
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
     "@nuxtjs/eslint-module": "^4.1.0",
     "@unocss/nuxt": "^0.59.2",
+    "nuxt-quasar-ui": "^2.0.8",
     "unocss": "^0.59.2"
   }
 }
