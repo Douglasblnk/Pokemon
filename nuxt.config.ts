@@ -13,6 +13,7 @@ export default defineNuxtConfig({
       pathPrefix: false,
     },
   ],
+  css: [ '~/assets/css/index.sass' ],
   app: {
     head: {
       charset: 'utf-8',
