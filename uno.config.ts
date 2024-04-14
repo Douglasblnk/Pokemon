@@ -7,6 +7,8 @@ import {
   transformerVariantGroup,
 } from 'unocss'
 
+import { FileSystemIconLoader } from '@iconify/utils/lib/loader/node-loaders'
+
 const spacing = {
   DEFAULT: '4px',
   px: '1px',
@@ -97,7 +99,19 @@ export default defineConfig({
   presets: [
     presetWind(),
     presetAttributify(),
-    presetIcons(),
+    presetIcons({
+      extraProperties: {
+        display: 'inline-block',
+        color: '',
+      },
+      warn: true,
+      collections: {
+        custom: FileSystemIconLoader(
+          './src/assets/icons',
+          svg => svg.replace(/<svg /, '<svg fill="currentColor" '),
+        ),
+      },
+    }),
   ],
   transformers: [
     transformerDirectives(),
