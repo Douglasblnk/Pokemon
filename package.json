@@ -22,6 +22,7 @@
     "@iconify/utils": "^2.1.22",
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
     "@nuxtjs/eslint-module": "^4.1.0",
+    "@pinia/nuxt": "^0.5.1",
     "@unocss/nuxt": "^0.59.2",
     "nuxt-quasar-ui": "^2.0.8",
     "unocss": "^0.59.2"

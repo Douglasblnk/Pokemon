@@ -2,6 +2,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: [
     '@unocss/nuxt',
+    '@pinia/nuxt',
     'nuxt-quasar-ui',
     '@nuxtjs/eslint-module',
     '@hebilicious/vue-query-nuxt',
