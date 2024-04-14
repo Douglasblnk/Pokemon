@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "0.38.6",
+    "@hebilicious/vue-query-nuxt": "^0.3.0",
     "@iconify-json/mdi": "^1.1.66",
     "@iconify/utils": "^2.1.22",
     "@nuxtjs/eslint-config-typescript": "^12.1.0",

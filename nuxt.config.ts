@@ -4,6 +4,7 @@ export default defineNuxtConfig({
     '@unocss/nuxt',
     'nuxt-quasar-ui',
     '@nuxtjs/eslint-module',
+    '@hebilicious/vue-query-nuxt',
   ],
   srcDir: './src',
   serverDir: './server',
