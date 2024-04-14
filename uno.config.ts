@@ -2,6 +2,7 @@ import {
   defineConfig,
   presetAttributify,
   presetIcons,
+  presetWebFonts,
   presetWind,
   transformerDirectives,
   transformerVariantGroup,
@@ -110,6 +111,18 @@ export default defineConfig({
           './src/assets/icons',
           svg => svg.replace(/<svg /, '<svg fill="currentColor" '),
         ),
+      },
+    }),
+    presetWebFonts({
+      provider: 'google',
+      fonts: {
+        mulish: [
+          {
+            name: 'Mulish',
+            weights: [ '400', '500', '600', '700', '800', '900' ],
+            italic: true,
+          },
+        ],
       },
     }),
   ],
