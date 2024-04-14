@@ -11,12 +11,16 @@
   },
   "dependencies": {
     "nuxt": "^3.11.2",
+    "sass": "^1.75.0",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "0.38.6",
+    "@iconify-json/mdi": "^1.1.66",
+    "@iconify/utils": "^2.1.22",
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
-    "@nuxtjs/eslint-module": "^4.1.0"
+    "@nuxtjs/eslint-module": "^4.1.0",
+    "unocss": "^0.59.2"
   }
 }
