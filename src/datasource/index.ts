@@ -9,3 +9,9 @@ export async function getPokemons(next: string) {
 
   return data
 }
+
+export async function getPokemon(search: string | undefined) {
+  const data = await $fetch<PokemonsApi.PokemonDetail>(`/api/pokemon/${search}`)
+
+  return data
+}
