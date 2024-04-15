@@ -23,6 +23,18 @@ export default defineNuxtConfig({
   },
   srcDir: './src',
   serverDir: './server',
+  vueQuery: {
+    queryClientOptions: {
+      defaultOptions: {
+        queries: {
+          refetchOnWindowFocus: false,
+          refetchOnReconnect: false,
+          retry: false,
+          staleTime: Infinity,
+        },
+      },
+    },
+  },
   quasar: {
     iconSet: 'mdi-v6',
     lang: 'pt-BR',
