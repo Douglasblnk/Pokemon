@@ -1,4 +1,4 @@
-import mapPokemonDetails from '../mappers'
+import { mapPokemonDetails } from '../mappers'
 import type { PokemonsApi } from '../types'
 
 async function getDetails(pokemons: PokemonsApi.PokemonsListing['results']) {
@@ -9,7 +9,7 @@ async function getDetails(pokemons: PokemonsApi.PokemonsListing['results']) {
   return Promise.all(promises)
 }
 
-export default async function getAllPokemons(nextPage: string | undefined): Promise<PokemonsApi.PokemonsResponse> {
+export default async function getAllPokemons(nextPage: string | undefined) {
   const page = nextPage || 'https://pokeapi.co/api/v2/pokemon'
 
   const pokemons = await $fetch<PokemonsApi.PokemonsListing>(

@@ -1,9 +1,14 @@
 const sizesEnum = {
   xs: 2,
   sm: 2,
-  md: 4,
+  md: 3,
   lg: 5,
   xl: 5,
+}
+
+const multiplierFactor: Record<string, number> = {
+  xs: 1.4,
+  lg: 1.3,
 }
 
 export default (foldersWrapper: Ref<HTMLDivElement | null | undefined>, spaceBetween: number) => {
@@ -22,7 +27,7 @@ export default (foldersWrapper: Ref<HTMLDivElement | null | undefined>, spaceBet
 
       const height = (
         (foldersWrapper.value?.clientWidth / folderQtd)
-        * ($q.screen.name === 'xs' ? 1.5 : 1.2)
+        * (multiplierFactor[$q.screen.name] || 1.2)
       ) - (spaceBetween || 0)
 
       folderSize.width = `${width}px`
@@ -36,6 +41,7 @@ export default (foldersWrapper: Ref<HTMLDivElement | null | undefined>, spaceBet
   )
 
   return {
+    calcFolderSize,
     folderSize,
   }
 }

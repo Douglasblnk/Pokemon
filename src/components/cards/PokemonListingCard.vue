@@ -2,21 +2,6 @@
 import type { PokemonsApi } from '~~/server/types'
 
 defineProps<PokemonsApi.PokemonDetail>()
-
-const $q = useQuasar()
-
-const typeColors: Record<string, string> = {
-  grass: 'bg-labels-grass',
-  poison: 'bg-labels-poison',
-  water: 'bg-labels-water',
-  fire: 'bg-labels-fire',
-  electric: 'bg-labels-electric',
-  ground: 'bg-labels-ground',
-  fairy: 'bg-labels-fairy',
-  normal: 'bg-labels-normal',
-  flying: 'bg-labels-flying',
-  default: 'bg-labels-default',
-}
 </script>
 
 <template>
@@ -44,7 +29,7 @@ const typeColors: Record<string, string> = {
         un-my-md
         un-font-semibold
       >
-        {{ name }}
+        {{ capitalize(name) }}
       </div>
 
       <div
@@ -56,21 +41,7 @@ const typeColors: Record<string, string> = {
 
       <QSpace />
 
-      <div
-        un-flex="~ wrap"
-        un-justify-center
-        un-mt-md
-      >
-        <QChip
-          v-for="pokemonType in types"
-          :key="pokemonType.slot"
-          un-color-white
-          :dense="$q.screen.name === 'xs'"
-          :class="typeColors[pokemonType.type.name] || 'color-labels-default'"
-        >
-          {{ pokemonType.type.name }}
-        </QChip>
-      </div>
+      <PokemonType :types="types" />
     </QCardSection>
   </QCard>
 </template>

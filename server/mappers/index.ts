@@ -1,6 +1,6 @@
 import type { PokemonsApi } from '../types'
 
-export default function mapPokemonDetails(pokemon: PokemonsApi.PokemonDetail): PokemonsApi.PokemonDetail {
+export function mapPokemonDetails(pokemon: PokemonsApi.PokemonDetail): PokemonsApi.PokemonDetail {
   return {
     id: pokemon.id,
     name: pokemon.name,
@@ -16,5 +16,13 @@ export default function mapPokemonDetails(pokemon: PokemonsApi.PokemonDetail): P
     },
     types: pokemon.types,
     abilities: pokemon.abilities,
+  }
+}
+
+export function mapPokemonAbilities(ability: PokemonsApi.PokemonAbilities): PokemonsApi.PokemonAbilitiesResponse {
+  return {
+    id: ability.id,
+    name: ability.name,
+    effect: ability.effect_entries.find(entry => entry.language.name === 'en')?.short_effect || '',
   }
 }

@@ -15,3 +15,13 @@ export async function getPokemon(search: string | undefined) {
 
   return data
 }
+
+export async function getPokemonAbilities(urls: string[] | undefined) {
+  const data = await $fetch<PokemonsApi.PokemonAbilitiesResponse[]>('/api/pokemon-abilities', {
+    params: {
+      urls,
+    },
+  })
+
+  return data
+}

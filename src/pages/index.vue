@@ -1,10 +1,17 @@
 <script setup lang="ts">
 import { getPokemon, getPokemons } from '~/datasource'
+import type { PokemonsApi } from '~~/server/types'
 
 const search = ref<string>('')
 const pokemonListingRef = ref<HTMLDivElement | null>()
 
-const { folderSize } = useListSize(pokemonListingRef, 16)
+const { push } = useRouter()
+
+const store = usePokemonStore()
+
+const { folderSize, calcFolderSize } = useListSize(pokemonListingRef, 16)
+
+onMounted(calcFolderSize)
 
 const {
   data,
@@ -18,6 +25,7 @@ const {
   queryFn: ({ pageParam }) => getPokemons(pageParam),
   getNextPageParam: value => value.next,
   select: data => data.pages.flatMap(page => page.results),
+  staleTime: Number.POSITIVE_INFINITY,
 })
 
 const {
@@ -39,6 +47,12 @@ async function onLoad(_: number, done: (_stop?: boolean | undefined) => void) {
   await fetchNextPage()
 
   done(!hasNextPage.value)
+}
+
+function openDetails(pokemon: PokemonsApi.PokemonDetail) {
+  store.$patch(pokemon)
+
+  push(`pokemon/${pokemon.id}`)
 }
 </script>
 
@@ -99,6 +113,7 @@ async function onLoad(_: number, done: (_stop?: boolean | undefined) => void) {
         un-min-h-190px
         :style="folderSize"
         un-mb="none sm:md"
+        @click="openDetails(searchData!)"
       />
 
       <QInfiniteScroll
@@ -130,15 +145,16 @@ async function onLoad(_: number, done: (_stop?: boolean | undefined) => void) {
             transition="scale"
             once
             un-min-w-153px
-            un-min-h-190px
+            un-min-h-220px
             :style="folderSize"
           >
             <PokemonListingCard
               v-bind="pokemon"
               un-min-w-153px
-              un-min-h-190px
+              un-min-h-220px
               :style="folderSize"
               un-mb="none sm:md"
+              @click="openDetails(pokemon)"
             />
           </QIntersection>
         </div>
