@@ -19,6 +19,7 @@ const {
   isError,
   fetchNextPage,
   hasNextPage,
+  suspense,
 } = useInfiniteQuery({
   queryKey: [ 'pokemons-listing' ],
   initialPageParam: 'https://pokeapi.co/api/v2/pokemon?offset=0?limit=24',
@@ -26,6 +27,10 @@ const {
   getNextPageParam: value => value.next,
   select: data => data.pages.flatMap(page => page.results),
   staleTime: Number.POSITIVE_INFINITY,
+})
+
+onServerPrefetch(async () => {
+  await suspense()
 })
 
 const {
