@@ -1,26 +1,56 @@
 <script setup lang="ts">
-import { getPokemons } from '~/datasource/pokemons'
+import { getPokemon, getPokemons } from '~/datasource'
 
-const search = ref()
+const search = ref<string>('')
+const pokemonListingRef = ref<HTMLDivElement | null>()
 
-const { data } = useInfiniteQuery({
-  queryKey: [ 'pokemons' ],
-  initialPageParam: 'https://pokeapi.co/api/v2/pokemon',
+const { folderSize } = useListSize(pokemonListingRef, 16)
+
+const {
+  data,
+  isLoading,
+  isError,
+  fetchNextPage,
+  hasNextPage,
+} = useInfiniteQuery({
+  queryKey: [ 'pokemons-listing' ],
+  initialPageParam: 'https://pokeapi.co/api/v2/pokemon?offset=0?limit=24',
   queryFn: ({ pageParam }) => getPokemons(pageParam),
   getNextPageParam: value => value.next,
   select: data => data.pages.flatMap(page => page.results),
 })
+
+const {
+  data: searchData,
+  isError: searchError,
+  isLoading: isSearchLoading,
+} = useQuery({
+  queryKey: [ 'pokemon-detail', computed(() => search.value?.toLowerCase()) ],
+  queryFn: ({ queryKey }) => getPokemon(queryKey[1]),
+  enabled: computed(() => !!search.value),
+  staleTime: Number.POSITIVE_INFINITY,
+})
+
+const loading = computed(() => {
+  return isLoading.value || isSearchLoading.value
+})
+
+async function onLoad(_: number, done: (_stop?: boolean | undefined) => void) {
+  await fetchNextPage()
+
+  done(!hasNextPage.value)
+}
 </script>
 
 <template>
-  <Header />
-
-  <Page>
+  <Page un-space-y-38px>
     <div
       un-bg-background
       un-w-full
       un-sticky
       un-top-0
+      un-py-sm
+      un-z-2
     >
       <QInput
         v-model="search"
@@ -29,11 +59,90 @@ const { data } = useInfiniteQuery({
         outlined
         clearable
         no-error-icon
+        hide-bottom-space
       >
         <template #prepend>
           <QIcon name="i-mdi-magnify" />
         </template>
       </QInput>
+    </div>
+
+    <div
+      un-font-semibold
+      un-text-lg
+    >
+      Pokémons
+    </div>
+
+    <div
+      v-if="isError || searchError"
+      un-flex
+      un-items-center
+      un-justify-center
+      un-text="lg center gray-500"
+      un-font-bold
+      un-h-full
+    >
+      {{ searchError ? 'Pokémon não encontrado' : 'Não foi possível buscar pelos Pokémons' }}
+    </div>
+
+    <PokemonListingSkeleton v-else-if="loading" />
+
+    <div
+      v-else
+      ref="pokemonListingRef"
+    >
+      <PokemonListingCard
+        v-if="searchData"
+        v-bind="searchData"
+        un-min-w-153px
+        un-min-h-190px
+        :style="folderSize"
+        un-mb="none sm:md"
+      />
+
+      <QInfiniteScroll
+        v-else-if="data?.length"
+        :offset="150"
+        scroll-target="#page-container"
+        @load="onLoad"
+      >
+        <template #loading>
+          <div
+            un-mt-xl
+            un-flex
+            un-justify-center
+          >
+            <QSpinnerDots
+              color="primary"
+              size="40px"
+            />
+          </div>
+        </template>
+
+        <div
+          un-flex="~ wrap"
+          un-gap-md
+        >
+          <QIntersection
+            v-for="pokemon in data"
+            :key="pokemon.id"
+            transition="scale"
+            once
+            un-min-w-153px
+            un-min-h-190px
+            :style="folderSize"
+          >
+            <PokemonListingCard
+              v-bind="pokemon"
+              un-min-w-153px
+              un-min-h-190px
+              :style="folderSize"
+              un-mb="none sm:md"
+            />
+          </QIntersection>
+        </div>
+      </QInfiniteScroll>
     </div>
   </Page>
 </template>
