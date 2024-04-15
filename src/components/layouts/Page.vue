@@ -12,8 +12,8 @@ defineOptions({ inheritAttrs: false })
     style="height: calc(100vh - 110px);"
   >
     <div
-      v-bind="$attrs"
       un-w="sm:col-7 col-12"
+      v-bind="$attrs"
     >
       <slot />
     </div>
