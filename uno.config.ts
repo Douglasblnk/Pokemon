@@ -65,6 +65,7 @@ export default defineConfig({
         text: '#C1BEBE',
         200: '#e3e5e6',
         500: '#9c9ca4',
+        600: '#616161',
       },
 
       primary: '#30455C',
