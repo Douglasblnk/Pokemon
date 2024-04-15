@@ -23,6 +23,15 @@ export default defineNuxtConfig({
   },
   srcDir: './src',
   serverDir: './server',
+  vueQuery: {
+    queryClientOptions: {
+      defaultOptions: {
+        queries: {
+          retry: 0,
+        },
+      },
+    },
+  },
   quasar: {
     iconSet: 'mdi-v6',
     lang: 'pt-BR',
