@@ -15,35 +15,35 @@ export namespace PokemonsApi {
     types: PokemonType[]
   }
 
-  interface PokemonAbility {
+  export interface PokemonAbility {
     ability: SimpleResource
   }
 
-  interface SimpleResource {
+  export interface SimpleResource {
     name: string
     url: string
   }
 
-  interface Pagination {
+  export interface Pagination {
     count: number
     next: string | null
     previous: string | null
   }
 
-  interface PokemonSprites {
+  export interface PokemonSprites {
     front_default: string | null
     front_shiny: string | null
     other: PokemonSpriteOther
   }
 
-  interface PokemonSpriteOther {
+  export interface PokemonSpriteOther {
     home: {
       front_default: string | null
       front_shiny: string | null
     }
   }
 
-  interface PokemonType {
+  export interface PokemonType {
     slot: number
     type: {
       name: string
