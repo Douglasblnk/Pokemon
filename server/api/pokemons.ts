@@ -1,10 +1,10 @@
 import getAllPokemons from '../services/get-all-pokemons'
 
 export default defineEventHandler(async (event) => {
-  const nextPage = event.context.params?.next
+  const params = getQuery<{ next: string }>(event)
 
   try {
-    const response = await getAllPokemons(nextPage)
+    const response = await getAllPokemons(params.next)
 
     return response
   }
