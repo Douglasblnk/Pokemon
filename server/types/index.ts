@@ -7,6 +7,25 @@ export namespace PokemonsApi {
     results: PokemonDetail[]
   }
 
+  export interface PokemonAbilitiesResponse {
+    id: number
+    name: string
+    effect: string
+  }
+
+  export interface PokemonAbilities {
+    id: number
+    name: string
+    effect_entries: {
+      effect: string
+      short_effect: string
+      language: {
+        name: string
+        url: string
+      }
+    }[]
+  }
+
   export interface PokemonDetail {
     id: number
     name: string

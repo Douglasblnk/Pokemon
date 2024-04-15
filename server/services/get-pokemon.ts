@@ -1,4 +1,4 @@
-import mapPokemonDetails from '../mappers'
+import { mapPokemonDetails } from '../mappers'
 import type { PokemonsApi } from '../types'
 
 export default async function getPokemon(search: string | undefined): Promise<PokemonsApi.PokemonDetail> {
