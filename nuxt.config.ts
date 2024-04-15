@@ -27,7 +27,10 @@ export default defineNuxtConfig({
     queryClientOptions: {
       defaultOptions: {
         queries: {
-          retry: 0,
+          refetchOnWindowFocus: false,
+          refetchOnReconnect: false,
+          retry: false,
+          staleTime: Infinity,
         },
       },
     },
