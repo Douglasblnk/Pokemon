@@ -7,9 +7,10 @@ defineOptions({ inheritAttrs: false })
     id="page-container"
     un-m="sm:lg md"
     un-column
+    un-grow
+    un-h-full
     un-items-center
     un-overflow-auto
-    style="height: calc(100vh - 110px);"
   >
     <div
       un-w="sm:col-7 col-12"

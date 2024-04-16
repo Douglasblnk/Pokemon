@@ -134,6 +134,7 @@ watch(data, (value) => {
       <div
         un-flex
         un-justify-center
+        un-pb-lg
       >
         <QBtn
           label="Voltar"

@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <div
+    un-column
+    un-h-screen
+  >
     <Header />
 
     <slot />
