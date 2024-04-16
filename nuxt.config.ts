@@ -1,9 +1,9 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: [
+    'nuxt-quasar-ui',
     '@unocss/nuxt',
     '@pinia/nuxt',
-    'nuxt-quasar-ui',
     '@nuxtjs/eslint-module',
     '@hebilicious/vue-query-nuxt',
   ],
@@ -13,7 +13,20 @@ export default defineNuxtConfig({
       pathPrefix: false,
     },
   ],
-  css: [ '~/assets/css/index.sass' ],
+  css: [
+    'quasar/src/css/index.sass',
+    '~/assets/css/index.sass',
+  ],
+  build: {
+    transpile: [ 'quasar' ],
+  },
+  nitro: {
+    preset: 'aws-amplify',
+    serveStatic: true,
+    output: {
+      publicDir: '.output/server',
+    },
+  },
   app: {
     head: {
       charset: 'utf-8',
