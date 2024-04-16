@@ -90,6 +90,10 @@ ESLint foi integrado ao projeto como a ferramenta de análise de código para ga
 └── uno.config.ts 
 ```
 
+## Demo
+
+<https://pokemon.douglasblnk.com/>
+
 ## Instalação
 
 É necessário ter o [Node.js](https://nodejs.org/) e pnpm (de preferência) instalados em sua máquina.
