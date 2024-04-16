@@ -22,9 +22,7 @@ export default defineNuxtConfig({
   },
   nitro: {
     preset: 'aws-amplify',
-    output: {
-      publicDir: '.output/server',
-    },
+
   },
   app: {
     head: {
