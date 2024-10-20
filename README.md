@@ -1,5 +1,3 @@
->  This is a challenge by [Coodesh](https://coodesh.com/)
-
 # Pokémons Challenge
 
 Uma listagem e visualização com todos os Pokémons da Pokeapi.
