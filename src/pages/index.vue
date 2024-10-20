@@ -2,7 +2,6 @@
 import { getPokemon, getPokemons } from '~/datasource'
 import type { PokemonsApi } from '~~/server/types'
 
-const search = ref<string>('')
 const pokemonListingRef = ref<HTMLDivElement | null>()
 
 const { push } = useRouter()
@@ -38,9 +37,9 @@ const {
   isError: searchError,
   isLoading: isSearchLoading,
 } = useQuery({
-  queryKey: [ 'pokemon-detail', computed(() => search.value?.toLowerCase()) ],
+  queryKey: [ 'pokemon-detail', computed(() => store.search?.toLowerCase()) ],
   queryFn: ({ queryKey }) => getPokemon(queryKey[1]),
-  enabled: computed(() => !!search.value),
+  enabled: computed(() => !!store.search),
   staleTime: Number.POSITIVE_INFINITY,
 })
 
@@ -62,30 +61,7 @@ function openDetails(pokemon: PokemonsApi.PokemonDetail) {
 </script>
 
 <template>
-  <Page un-space-y-38px>
-    <div
-      un-bg-background
-      un-w-full
-      un-sticky
-      un-top-0
-      un-py-sm
-      un-z-2
-    >
-      <QInput
-        v-model="search"
-        label="Pesquise por nome ou código"
-        debounce="500"
-        outlined
-        clearable
-        no-error-icon
-        hide-bottom-space
-      >
-        <template #prepend>
-          <QIcon name="i-mdi-magnify" />
-        </template>
-      </QInput>
-    </div>
-
+  <Page un-space-y-md>
     <div
       un-font-semibold
       un-text-lg

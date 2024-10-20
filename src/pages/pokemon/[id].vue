@@ -43,6 +43,17 @@ watch(data, (value) => {
     un-space-y-38px
     un-w="sm:col-5 col-12"
   >
+    <QBtn
+      label="Voltar"
+      color="secondary"
+      icon="i-mdi-arrow-left"
+      no-caps
+      rounded
+      un-font-bold
+      flat
+      @click="replace('/')"
+    />
+
     <div
       v-if="isError"
       un-text="center xl gray-500"
@@ -130,24 +141,6 @@ watch(data, (value) => {
           </QCardSection>
         </QCard>
       </QSlideTransition>
-
-      <div
-        un-flex
-        un-justify-center
-        un-pb-lg
-      >
-        <QBtn
-          label="Voltar"
-          color="secondary"
-          icon="i-mdi-arrow-left"
-          no-caps
-          rounded
-          un-font-bold
-          un-text-lg
-          flat
-          @click="replace('/')"
-        />
-      </div>
     </template>
   </Page>
 </template>

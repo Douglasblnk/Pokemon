@@ -8,8 +8,6 @@ import {
   transformerVariantGroup,
 } from 'unocss'
 
-import { FileSystemIconLoader } from '@iconify/utils/lib/loader/node-loaders'
-
 const spacing = {
   DEFAULT: '4px',
   px: '1px',
@@ -68,7 +66,11 @@ export default defineConfig({
         600: '#616161',
       },
 
-      primary: '#30455C',
+      primary: {
+        DEFAULT: '#30455C',
+        light: '#30455c1a',
+      },
+
       secondary: '#00A3FF',
 
       labels: {
@@ -108,12 +110,6 @@ export default defineConfig({
         color: '',
       },
       warn: true,
-      collections: {
-        custom: FileSystemIconLoader(
-          './src/assets/icons',
-          svg => svg.replace(/<svg /, '<svg fill="currentColor" '),
-        ),
-      },
     }),
     presetWebFonts({
       provider: 'google',
@@ -141,7 +137,9 @@ export default defineConfig({
           --color-black: ${theme.colors.black};
           --color-white: ${theme.colors.white};
           --color-gray-text: ${theme.colors.gray.text};
-          --color-primary: ${theme.colors.primary};
+          --color-gray: ${theme.colors.gray['600']};
+          --color-primary: ${theme.colors.primary.DEFAULT};
+          --color-primary-light: ${theme.colors.primary.light};
           --color-secondary: ${theme.colors.secondary};
         }
       `,
